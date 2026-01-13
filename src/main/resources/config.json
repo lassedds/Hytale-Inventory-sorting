@@ -1,0 +1,17 @@
+{
+  "defaultSortMode": "CATEGORY",
+  "autoStackOnPickup": true,
+  "autoSortOnClose": false,
+  "sortHotbarSeparately": true,
+  "sortKeybind": "R",
+  "playSortSound": true,
+  "categoryOrder": [
+    "WEAPONS",
+    "TOOLS",
+    "ARMOR",
+    "FOOD",
+    "BLOCKS",
+    "MATERIALS",
+    "MISC"
+  ]
+}

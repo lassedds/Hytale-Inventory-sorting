@@ -1,0 +1,9 @@
+{
+  "Group": "InventorySorting",
+  "Name": "InventorySorting",
+  "Version": "${version}",
+  "Description": "${description}",
+  "Main": "com.inventorysorting.InventorySortingPlugin",
+  "Authors": ["Community"],
+  "Website": "https://github.com/lassedds/Hytale-Inventory-sorting"
+}
