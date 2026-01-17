@@ -6,6 +6,10 @@ import java.util.Set;
 /**
  * Configuration for the ExcavatorTools plugin.
  *
+ * Block IDs are based on Hytale's naming conventions.
+ * These may need to be updated once the decompiled server API is available
+ * to confirm exact block registry names.
+ *
  * Note: Once Hytale's configuration API is available, this should be loaded
  * from a config file (e.g., config.json or config.yml)
  */
@@ -40,55 +44,107 @@ public class ExcavatorConfig {
     }
 
     private void initializeDefaultBlocks() {
-        // Stone-like blocks for the Excavator Hammer
-        // Note: Block IDs should match Hytale's block registry
+        // ============================================
+        // HAMMER BLOCKS (Stone, Ores, Hard Materials)
+        // ============================================
+
+        // Basic stone types
         hammerBlocks.add("stone");
         hammerBlocks.add("cobblestone");
-        hammerBlocks.add("granite");
-        hammerBlocks.add("diorite");
-        hammerBlocks.add("andesite");
-        hammerBlocks.add("deepslate");
-        hammerBlocks.add("tuff");
-        hammerBlocks.add("calcite");
-        hammerBlocks.add("coal_ore");
+        hammerBlocks.add("rubble");           // Hytale starting material
+        hammerBlocks.add("raw_stone");
+
+        // Hytale ores (confirmed from game)
+        hammerBlocks.add("copper_ore");
         hammerBlocks.add("iron_ore");
         hammerBlocks.add("gold_ore");
-        hammerBlocks.add("diamond_ore");
-        hammerBlocks.add("emerald_ore");
-        hammerBlocks.add("lapis_ore");
-        hammerBlocks.add("redstone_ore");
-        hammerBlocks.add("copper_ore");
-        hammerBlocks.add("netherrack");
-        hammerBlocks.add("basalt");
-        hammerBlocks.add("blackstone");
-        hammerBlocks.add("end_stone");
-        hammerBlocks.add("obsidian");
-        hammerBlocks.add("sandstone");
-        hammerBlocks.add("red_sandstone");
-        hammerBlocks.add("prismarine");
-        hammerBlocks.add("terracotta");
-        hammerBlocks.add("brick");
-        hammerBlocks.add("nether_brick");
+        hammerBlocks.add("silver_ore");
+        hammerBlocks.add("cobalt_ore");
+        hammerBlocks.add("thorium_ore");
+        hammerBlocks.add("adamantite_ore");
+        hammerBlocks.add("mithril_ore");
+        hammerBlocks.add("coal_ore");
 
-        // Dirt-like blocks for the Excavator Shovel
+        // Decorative/building stone
+        hammerBlocks.add("sandstone");
+        hammerBlocks.add("limestone");
+        hammerBlocks.add("marble");
+        hammerBlocks.add("granite");
+        hammerBlocks.add("slate");
+        hammerBlocks.add("basalt");
+
+        // Bricks and processed stone
+        hammerBlocks.add("stone_brick");
+        hammerBlocks.add("stone_bricks");
+        hammerBlocks.add("brick");
+        hammerBlocks.add("bricks");
+        hammerBlocks.add("clay_brick");
+
+        // Zone-specific stones (Hytale has multiple zones)
+        hammerBlocks.add("desert_stone");
+        hammerBlocks.add("jungle_stone");
+        hammerBlocks.add("tundra_stone");
+        hammerBlocks.add("cave_stone");
+        hammerBlocks.add("underground_stone");
+
+        // Hardened/special blocks
+        hammerBlocks.add("obsidian");
+        hammerBlocks.add("hardite");
+        hammerBlocks.add("bedrock");          // Typically unbreakable, but included for completeness
+
+        // ============================================
+        // SHOVEL BLOCKS (Dirt, Sand, Soft Materials)
+        // ============================================
+
+        // Basic dirt types
         shovelBlocks.add("dirt");
+        shovelBlocks.add("grass");
         shovelBlocks.add("grass_block");
-        shovelBlocks.add("coarse_dirt");
-        shovelBlocks.add("podzol");
-        shovelBlocks.add("mycelium");
-        shovelBlocks.add("rooted_dirt");
         shovelBlocks.add("mud");
+        shovelBlocks.add("peat");
+        shovelBlocks.add("topsoil");
+
+        // Sand variants
         shovelBlocks.add("sand");
         shovelBlocks.add("red_sand");
+        shovelBlocks.add("desert_sand");
+        shovelBlocks.add("beach_sand");
+        shovelBlocks.add("fine_sand");
+
+        // Gravel and loose materials
         shovelBlocks.add("gravel");
+        shovelBlocks.add("pebbles");
+        shovelBlocks.add("loose_rock");
+
+        // Clay types
         shovelBlocks.add("clay");
-        shovelBlocks.add("soul_sand");
-        shovelBlocks.add("soul_soil");
+        shovelBlocks.add("wet_clay");
+        shovelBlocks.add("terracotta");
+
+        // Snow and ice (shovel-appropriate)
         shovelBlocks.add("snow");
         shovelBlocks.add("snow_block");
+        shovelBlocks.add("packed_snow");
         shovelBlocks.add("powder_snow");
+
+        // Farming/garden blocks
         shovelBlocks.add("farmland");
-        shovelBlocks.add("dirt_path");
+        shovelBlocks.add("tilled_dirt");
+        shovelBlocks.add("garden_soil");
+        shovelBlocks.add("compost");
+        shovelBlocks.add("mulch");
+
+        // Zone-specific dirt (Hytale zones)
+        shovelBlocks.add("jungle_dirt");
+        shovelBlocks.add("forest_dirt");
+        shovelBlocks.add("swamp_mud");
+        shovelBlocks.add("tundra_dirt");
+        shovelBlocks.add("permafrost");
+
+        // Ash and volcanic
+        shovelBlocks.add("ash");
+        shovelBlocks.add("volcanic_ash");
+        shovelBlocks.add("soot");
     }
 
     // Getters and setters
@@ -147,6 +203,34 @@ public class ExcavatorConfig {
 
     public Set<String> getShovelBlocks() {
         return shovelBlocks;
+    }
+
+    /**
+     * Add a block to the hammer block list
+     */
+    public void addHammerBlock(String blockId) {
+        hammerBlocks.add(blockId.toLowerCase());
+    }
+
+    /**
+     * Add a block to the shovel block list
+     */
+    public void addShovelBlock(String blockId) {
+        shovelBlocks.add(blockId.toLowerCase());
+    }
+
+    /**
+     * Remove a block from the hammer block list
+     */
+    public void removeHammerBlock(String blockId) {
+        hammerBlocks.remove(blockId.toLowerCase());
+    }
+
+    /**
+     * Remove a block from the shovel block list
+     */
+    public void removeShovelBlock(String blockId) {
+        shovelBlocks.remove(blockId.toLowerCase());
     }
 
     /**

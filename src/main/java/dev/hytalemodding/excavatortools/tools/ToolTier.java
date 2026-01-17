@@ -1,25 +1,32 @@
 package dev.hytalemodding.excavatortools.tools;
 
 /**
- * Represents the material tier of a tool.
+ * Represents the material tier of a tool in Hytale.
  *
- * Note: Hytale may have different tiers/materials. Adjust as needed
- * once the actual game API is available.
+ * Hytale progression: Crude → Copper → Iron → Cobalt → Thorium → Adamantite → Mithril
+ *
+ * Note: Iron can mine ALL ores in Hytale (as of early access).
+ * Higher tiers provide better durability and mining speed.
  */
 public enum ToolTier {
-    WOOD("Wood", 0),
-    STONE("Stone", 1),
-    IRON("Iron", 2),
-    GOLD("Gold", 0),  // Gold has low mining level but high speed
-    DIAMOND("Diamond", 3),
-    NETHERITE("Netherite", 4);
+    CRUDE("Crude", 0, 59, 2.0f),
+    COPPER("Copper", 1, 131, 4.0f),
+    IRON("Iron", 2, 250, 6.0f),
+    COBALT("Cobalt", 3, 500, 7.0f),
+    THORIUM("Thorium", 3, 750, 7.5f),
+    ADAMANTITE("Adamantite", 4, 1200, 8.5f),
+    MITHRIL("Mithril", 5, 1800, 10.0f);
 
     private final String displayName;
     private final int miningLevel;
+    private final int baseDurability;
+    private final float baseMiningSpeed;
 
-    ToolTier(String displayName, int miningLevel) {
+    ToolTier(String displayName, int miningLevel, int baseDurability, float baseMiningSpeed) {
         this.displayName = displayName;
         this.miningLevel = miningLevel;
+        this.baseDurability = baseDurability;
+        this.baseMiningSpeed = baseMiningSpeed;
     }
 
     /**
@@ -32,9 +39,25 @@ public enum ToolTier {
     /**
      * Get the mining level for this tier.
      * Higher levels can mine harder blocks.
+     * Note: In Hytale early access, Iron can mine ALL ores.
      */
     public int getMiningLevel() {
         return miningLevel;
+    }
+
+    /**
+     * Get the base durability for this tier.
+     * Excavator tools multiply this by 3 due to 3x3 mining.
+     */
+    public int getBaseDurability() {
+        return baseDurability;
+    }
+
+    /**
+     * Get the base mining speed for this tier.
+     */
+    public float getBaseMiningSpeed() {
+        return baseMiningSpeed;
     }
 
     /**
@@ -52,6 +75,29 @@ public enum ToolTier {
             if (tier.name().equalsIgnoreCase(name) || tier.displayName.equalsIgnoreCase(name)) {
                 return tier;
             }
+        }
+        return null;
+    }
+
+    /**
+     * Get the next tier upgrade, or null if this is the highest tier
+     */
+    public ToolTier getNextTier() {
+        ToolTier[] tiers = values();
+        int currentIndex = this.ordinal();
+        if (currentIndex < tiers.length - 1) {
+            return tiers[currentIndex + 1];
+        }
+        return null;
+    }
+
+    /**
+     * Get the previous tier, or null if this is the lowest tier
+     */
+    public ToolTier getPreviousTier() {
+        int currentIndex = this.ordinal();
+        if (currentIndex > 0) {
+            return values()[currentIndex - 1];
         }
         return null;
     }
