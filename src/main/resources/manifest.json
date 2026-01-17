@@ -1,0 +1,10 @@
+{
+    "Group": "dev.hytalemodding",
+    "Name": "ExcavatorTools",
+    "Version": "1.0.0",
+    "Description": "3x3 mining tools for Hytale - includes Excavator Hammer for stone/ores and Excavator Shovel for dirt/sand",
+    "Authors": ["HytaleModding Community"],
+    "ServerVersion": "1.0-SNAPSHOT",
+    "Dependencies": [],
+    "Main": "dev.hytalemodding.excavatortools.ExcavatorPlugin"
+}
